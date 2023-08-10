@@ -1,4 +1,4 @@
-const registerUser = (req, res) => {
+const viewregisterUser = (req, res) => {
   res.render("register");
 };
-module.exports = registerUser;
+module.exports = viewregisterUser;

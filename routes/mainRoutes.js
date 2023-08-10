@@ -1,10 +1,11 @@
 const express = require("express");
 const loginUser = require("../controllers/loginControllers");
-const registerUser = require("../controllers/registerControllers");
 const homePage = require("../controllers/homeControllers");
+const viewregisterUser = require("../controllers/registerControllers");
+const registerUser = require("../controllers/registerpostContoller");
 const routes = express.Router();
 routes.get("/", homePage);
 routes.get("/users/login", loginUser);
-routes.get("/users/register", registerUser);
-
+routes.get("/users/register", viewregisterUser);
+routes.post("/users/register", registerUser);
 module.exports = routes;

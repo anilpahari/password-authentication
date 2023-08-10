@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     rquired: [true, "Name is required."],
   },
   email: {
-    type: email,
+    type: String,
     rquired: [true, "Email is required."],
   },
   password: {
@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema({
     rquired: [true, "password is required."],
   },
   createdAt: {
-    type: Date(),
-    default: Date.now(),
+    type: Date,
+    default: Date.now,
   },
 });
 const userModel = mongoose.model("authentication", userSchema);

@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const expressLayout = require("express-ejs-layouts");
+const flash = require("connect-flash");
+const session = require("express-session");
 const routes = require("./routes/mainRoutes");
 require("dotenv").config();
 mongoose
@@ -17,6 +19,22 @@ app.use(expressLayout);
 app.set("view engine", "ejs");
 app.set("layout", "./layouts/main");
 app.use(express.urlencoded({ extended: false }));
+//express session middleware
+app.use(
+  session({
+    secret: process.env.secret_msg,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+//connect-flash
+app.use(flash());
+
+app.use((req, res, next) => {
+  (res.locals.success_msg = req.flash("success_msg")),
+    (res.locals.error_msg = req.flash("error_msg")),
+    next();
+});
 app.use("/", routes);
 app.listen(8000, () => {
   console.log("Server started at port 8000..");
