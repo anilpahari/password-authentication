@@ -6,12 +6,14 @@ const registerUser = require("../controllers/registerpostContoller");
 const postUser = require("../controllers/loginPostControllers");
 const dashboard = require("../controllers/dashboard");
 const logoutUser = require("../controllers/logoutControllers");
+const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
+
 const routes = express.Router();
-routes.get("/", homePage);
+routes.get("/", forwardAuthenticated, homePage);
 routes.get("/users/login", loginUser);
 routes.get("/users/register", viewregisterUser);
 routes.post("/users/register", registerUser);
 routes.post("/users/login", postUser);
-routes.get("/dashboard", dashboard);
+routes.get("/dashboard", ensureAuthenticated, dashboard);
 routes.get("/users/logout", logoutUser);
 module.exports = routes;
